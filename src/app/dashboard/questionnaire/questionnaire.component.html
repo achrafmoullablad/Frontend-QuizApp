@@ -1,0 +1,151 @@
+<app-sidebar></app-sidebar>
+<section id="content">
+  <!-- NAVBAR -->
+  <nav>
+    <i class='bx bx-menu' ></i>
+    <form action="#">
+      <div class="form-input">
+        <input type="search" placeholder="Search...">
+        <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+      </div>
+    </form>
+  </nav>
+  <!-- NAVBAR -->
+  <!-- MAIN -->
+  <main>
+    <div class="head-title">
+      <div class="left">
+        <h1>Questionnaire :</h1>
+      </div>
+    </div>
+    <div class="table-data">
+      <div class="todo">
+        <div class="head">
+          <h3>listes des questionnaire </h3>
+          <a href="#" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal">
+            <i class='bx bx-plus'></i>
+          </a>
+        </div>
+        <ul class="todo-list">
+          <li class="completed" *ngFor="let q of quest">
+            <a ngbDropdownItem href="#" (click)="passTest(q.id)">
+              <p>{{q.titre}}</p>
+            </a>
+            <i class='bx bx-dots-vertical-rounded' ></i>
+          </li>
+        </ul>
+      </div>
+      <div class="order">
+        <div class="head">
+          <h3>Les Questions </h3>
+          <a href="#" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#question">
+            <i class='bx bx-plus'></i>
+          </a>
+          <i class='bx bx-search' ></i>
+          <i class='bx bx-filter' ></i>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Categorie</th>
+              <th>Nombre question</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <p>Mathematique</p>
+              </td>
+              <td>20</td>
+              <td>
+                <span class="status bg-primary">Ajouter</span>
+                <span class="status bg-danger">Supprime</span>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </main>
+  <!-- MAIN -->
+</section>
+<!-- CONTENT -->
+<!-- Modal Create Categories-->
+<div class="create-category">
+  <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-info" id="exampleModalLabel">New Category</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="Titre" class="form-label">Titre</label>
+              <input [(ngModel)]="questionnaire.titre" type="text" name="Titre" placeholder="Entrer name of category" class="form-control" id="nom" >
+            </div>
+            <div class="mb-3">
+              <select class="form-select" name="categorie_id" required [(ngModel)]="questionnaire.Categorie.id">
+                <option selected disabled>select Categorie</option>
+                <option *ngFor="let cat of categorie" [ngValue]="cat.id">{{cat.nom}}</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary m-2 p-2">Create</button>
+            <button type="reset" class="btn btn-secondary m-2 p-2">Cancel</button>
+          </form>
+        </div>
+        <div [hidden]="!submitted">
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>You submitted </strong> Successfully!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Create affection question-->
+<div class="create-category">
+  <div class="modal fade" id="question" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-info" id="exampleModalLabel">Affection Question To Questionnaire</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (click)="affectionToQuestionnaire()">
+             <!--questionaire-->
+            <div class="mb-3">
+              <select class="form-select" name="questionnaire" required [(ngModel)]="question.questionnaire.id">
+                <option selected disabled>select Questionnaire</option>
+                <option *ngFor="let q of quest" [ngValue]="q.id">{{q.titre}}</option>
+              </select>
+            </div>
+            <!--question-->
+            <div class="mb-3">
+              <select class="form-select" name="questions" required [(ngModel)]="question.id">
+                <option selected disabled>select Questionnaire</option>
+                <option *ngFor="let item of questions" [ngValue]="item.id">{{item.text}}</option>
+              </select>
+            </div>
+            <!---->
+            <button type="submit" class="btn btn-primary m-2 p-2">Create</button>
+            <button type="reset" class="btn btn-secondary m-2 p-2">Cancel</button>
+          </form>
+          {{question | json}}
+        </div>
+        <div [hidden]="!submitted">
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>You submitted </strong> Successfully!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

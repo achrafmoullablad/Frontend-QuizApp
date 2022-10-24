@@ -1,0 +1,44 @@
+<section id="content">
+  <div class="container">
+    <div class="row justify-content-center" *ngIf="page!=questionnaire.questions.length">
+     <div class="col-lg-12 col-12">
+      <h3 class="text-center text-info">{{questionnaire.titre}}</h3>
+      <div class="card" style="width:60rem;" *ngFor="let q of questionnaire.questions; index as i">
+        <div class="toto" *ngIf="i==page">
+          <p>{{q.text}}</p>
+          <div class="card-body reponse" *ngFor="let r of q.reponses">
+            <input type="radio" name="options" id="reponse" (click)="score(r.correcte)"> {{r.choix}}
+          </div>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="#" class="btn btn-secondary" (click)="goto(page-1)" [hidden]="page==0">Prev</a>
+            <a href="#" class="btn btn-primary" (click)="goto(page+1)" [hidden]="page==questionnaire.questions.length-1" >Next</a>
+          </div>
+        </div>
+      </div>
+     </div>
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end" *ngIf="page==questionnaire.questions.length-1">
+      <div class="col-lg-12 col-12">
+        <a href="#" class="btn text-white btn-info p-2 m-2" data-bs-toggle="modal" data-bs-target="#score">Score</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Score-->
+<div class="score">
+  <div class="modal fade" id="score" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-info" id="exampleModalLabel">Score Total</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <h2 class="text-center text-info">{{compteur}}/{{questionnaire.questions.length}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

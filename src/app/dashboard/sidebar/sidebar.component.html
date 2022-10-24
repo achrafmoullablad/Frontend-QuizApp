@@ -1,0 +1,66 @@
+<!-- SIDEBAR -->
+<section id="sidebar">
+  <a href="#" routerLink="/home" class="brand">
+    <div class="logo">
+      <img src="../../../assets/images/logo/QUIZ.png" alt="logo">
+    </div>
+  </a>
+  <div class="container" *ngIf="currentUser; else loggedOut">
+    <header class="jumbotron">
+      <p>
+        <strong>Bonjour {{ currentUser.username }} </strong>
+      </p>
+    </header>
+  </div>
+  <ul class="side-menu top">
+    <li class="active">
+      <a routerLink="/dashboard">
+        <i class='bx bxs-dashboard' ></i>
+        <span class="text">Dashboard</span>
+      </a>
+    </li>
+    <ul>
+      <li class="active">
+      <a routerLink="/categorie">
+        <i class='bx bxs-shopping-bag-alt' ></i>
+        <span class="text">Caterories</span>
+      </a>
+      </li>
+    </ul>
+    <ul>
+      <li class="active">
+      <a routerLink="/questionnaire">
+        <i class='bx bxs-message-dots' ></i>
+        <span class="text">Questionnaire</span>
+      </a>
+    </li>
+    </ul>
+    <ul>
+      <li class="active">
+      <a routerLink="/reponse">
+        <i class='bx bxs-message-dots' ></i>
+        <span class="text">Reponse</span>
+      </a>
+    </li>
+    </ul>
+    <ul>
+      <li class="active">
+      <a routerLink="/utilisateur">
+        <i class='bx bxs-group' ></i>
+        <span class="text">Candidat</span>
+      </a></li>
+    </ul>
+  </ul>
+  <ul class="side-menu">
+    <li>
+      <a href="#" class="logout" (click)="logout()" >
+        <i class='bx bxs-log-out-circle' ></i>
+        <ng-template #loggedOut>
+          Please login.
+        </ng-template>
+        <span class="text">Logout</span>
+      </a>
+    </li>
+  </ul>
+</section>
+

@@ -1,0 +1,99 @@
+<app-sidebar></app-sidebar>
+<section id="content">
+  <!-- NAVBAR -->
+  <nav>
+    <i class='bx bx-menu' ></i>
+    <form action="#">
+      <div class="form-input">
+        <input type="search" placeholder="Search...">
+        <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+      </div>
+    </form>
+  </nav>
+  <!-- NAVBAR -->
+  <!-- MAIN -->
+  <main>
+    <div class="head-title">
+      <div class="left">
+        <h1>les candidat :</h1>
+      </div>
+    </div>
+
+   <form (submit)="sendEmail()">
+    <div class="row">
+      <div class="col-lg-6">
+        <!-- Name input -->
+        <div class="form-outline">
+          <label class="form-label" for="to">To</label>
+          <input type="text" class="form-control" name="to" id="to" [(ngModel)]="email.touser" />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <!-- Email input -->
+        <div class="form-outline">
+          <label class="form-label" for="subject">Subject</label>
+          <input type="text" class="form-control" name="subject" id="subject" [(ngModel)]="email.subject" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <!-- Email input -->
+        <div class="form-outline">
+          <label class="form-label" for="from">From</label>
+          <input type="text" class="form-control" name="from" id="from" value="{{this.currentUser.email}}" readonly/>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-outline">
+          <label class="form-label" for="messsage">Choose Questionnaire:</label>
+        <select class="form-select" name="message" id="message" [(ngModel)]="email.message" required>
+          <option selected disabled>select Questionnaire</option>
+          <option *ngFor="let q of quest" [ngValue]="q.id">{{q.titre}}</option>
+        </select>
+          <button type="submit" class="btn btn-info p-2 m-2">Send Mail</button>
+        </div>
+      </div>
+    </div>
+   </form>
+   <div class="table-data">
+    <div class="order">
+      <div class="head">
+        <h3>listes des candidat :</h3>
+
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>To</th>
+            <th>Subject</th>
+            <th>Message</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let m of mails">
+            <td>
+              <p>{{m.touser}}</p>
+            </td>
+            <td>
+              <p>{{m.subject}}</p>
+            </td>
+            <td>
+              <p>{{m.message}}</p>
+            </td>
+            <td>
+              <p>{{m.score}}</p>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  </main>
+  <!-- MAIN -->
+</section>
+<!-- CONTENT -->

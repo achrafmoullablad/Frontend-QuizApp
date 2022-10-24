@@ -1,0 +1,46 @@
+<app-sidebar></app-sidebar>
+<section id="content">
+  <nav>
+    <i class='bx bx-menu' ></i>
+    <form action="#">
+      <div class="form-input">
+        <input type="search" placeholder="Search...">
+        <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+      </div>
+    </form>
+  </nav>
+  <!-- NAVBAR -->
+  <!-- MAIN -->
+  <main>
+    <h2 class="text-info text-center">FORM ADD REPONSE</h2>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-12">
+          <form (submit)="onSubmit()">
+            <div class="mb-3">
+              <label for="Question" class="form-label">Question</label>
+              <select class="form-select" name="Question" required [(ngModel)]="reponse.question.id">
+                <option selected disabled>select Question</option>
+                <option *ngFor="let q of question" [ngValue]="q.id">{{q.text}}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="nom" class="form-label">Name</label>
+              <input [(ngModel)]="reponse.choix" type="text" name="nom" placeholder="Entrer name of category" class="form-control" id="nom" >
+            </div>
+            <div class="mb-3">
+              <label for="is Correct" class="form-label">Question</label>
+              <select class="form-select" name="categorie_id" required [(ngModel)]="reponse.correcte">
+                <option selected disabled>select reponse</option>
+                <option [ngValue]="1">True</option>
+                <option [ngValue]="0">False</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary m-2 p-2">Create</button>
+            <button type="reset" class="btn btn-secondary m-2 p-2">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</section>
